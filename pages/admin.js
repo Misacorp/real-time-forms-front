@@ -9,24 +9,33 @@ import initStore from '../utils/store';
 import Auth from '../utils/auth.js';
 
 const auth = new Auth();
-auth.login();
 
 class Admin extends React.Component {
   static async getInitialProps({ store }) {
-    // Adding a default/initialState can be done as follows:
-    // store.dispatch({ type: 'ADD_TODO', text: 'It works!' });
-    const res = await fetch(
-      'https://api.github.com/repos/ooade/NextSimpleStarter'
-    );
-    const json = await res.json();
-    return { stars: json.stargazers_count };
   }
+
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
+
 
   render() {
     return (
       <div>
         <div>
-          <Todo />
+          <Button
+            onClick={this.login.bind(this)}
+          >
+            Login
+          </Button>
         </div>
         
         <script src="https://cdn.auth0.com/js/auth0/8.10.1/auth0.min.js"></script>
