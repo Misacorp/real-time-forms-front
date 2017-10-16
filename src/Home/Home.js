@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Welcome from '../Components/Welcome';
 import QuestionViewer from '../Components/QuestionViewer';
+import QuestionCreator from '../Components/QuestionCreator';
 
 class Home extends Component {
   login() {
@@ -46,7 +47,8 @@ class Home extends Component {
                 <p>View your questions and create new ones.</p>
                 <p>Your user id is: {user_id}</p>
 
-                <QuestionViewer user={user_id}/>
+                <QuestionViewer user={user_id} />
+                <QuestionCreator user={user_id} />
               </div>
             )
         }

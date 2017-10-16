@@ -5,10 +5,20 @@ import axios from 'axios';
 class QuestionViewer extends Component {
   getQuestions() {
     const user_id = this.props.user;
+
+    // Initialize Axios for API requests
+    const comms = axios.create({
+      baseURL: 'http://realtimeforms.local:1337/api',
+      timeout: '15000',
+      headers: {
+        'Authorization': `apikey=${user_id}` 
+      }
+    })
+
     console.log(`Getting questions for ${user_id}`);
 
     // Get questions from API
-    axios.get('http://realtimeforms.local:1337/api/question')
+    comms.get('/question')
       .then((res) => {
         console.log(res);
       })
