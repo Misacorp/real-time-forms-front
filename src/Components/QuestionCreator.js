@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import axios from 'axios';
 
 class QuestionCreator extends Component {
@@ -50,16 +50,20 @@ class QuestionCreator extends Component {
           controlId="formBasicText"
           validationState={this.getValidationState()}
         >
-          <ControlLabel>Working example with validation</ControlLabel>
+          <ControlLabel>Create a new question</ControlLabel>
           <FormControl
             type="text"
             value={this.state.value}
-            placeholder="Enter text"
+            placeholder="What would you like to know?"
             onChange={this.handleChange.bind(this)}
-            onClick={this.createQuestion.bind(this)}
           />
           <FormControl.Feedback />
-          <HelpBlock>Validation is based on string length.</HelpBlock>
+          <HelpBlock>An ID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
+          <Button 
+            onClick={this.createQuestion.bind(this)}
+          >
+            Submit
+          </Button>
         </FormGroup>
       </form>
     );

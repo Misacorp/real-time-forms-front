@@ -45,9 +45,9 @@ class Home extends Component {
                 <Welcome name={username}/>
                 <h2>Manage Forms</h2>
                 <p>View your questions and create new ones.</p>
-                <p>Your user id is: {user_id}</p>
 
                 <QuestionViewer user={user_id} />
+                <hr/>
                 <QuestionCreator user={user_id} />
               </div>
             )

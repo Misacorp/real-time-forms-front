@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import QuestionList from '../Components/QuestionList';
 import axios from 'axios';
 
 class QuestionViewer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      data: []
+    };
+  }
+
   getQuestions() {
     const user_id = this.props.user;
 
@@ -15,15 +23,16 @@ class QuestionViewer extends Component {
       }
     })
 
-    console.log(`Getting questions for ${user_id}`);
-
     // Get questions from API
     comms.get('/question')
       .then((res) => {
-        console.log(res);
+        this.setState({
+          data: res.data
+        })
       })
       .catch((err) => {
-        console.log("Error fetching data.");
+        console.log("Error fetching data:");
+        console.log(err);
       });
   }
 
@@ -37,6 +46,7 @@ class QuestionViewer extends Component {
         >
           Find my questions
         </Button>
+        <QuestionList data={this.state.data} />
       </div>
     );
   }
