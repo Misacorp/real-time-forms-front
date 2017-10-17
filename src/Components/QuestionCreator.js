@@ -17,7 +17,7 @@ class QuestionCreator extends Component {
       baseURL: 'http://realtimeforms.local:1337/api',
       timeout: '15000',
       headers: {
-        'Authorization': `apikey=${this.props.api_key}` 
+        'Authorization': this.props.api_key
       }
     });
 
