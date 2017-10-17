@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { Alert, Button, FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import axios from 'axios';
 
 class QuestionCreator extends Component {
   constructor() {
     super();
-    this.state = { value: '' };
+    this.state = { 
+      value: '',
+      created_id: ''
+    };
   }
 
   createQuestion() {
-    const user_id = this.props.user;
-
     // Initialize Axios for API requests
     const comms = axios.create({
       baseURL: 'http://realtimeforms.local:1337/api',
       timeout: '15000',
       headers: {
-        'Authorization': `apikey=${user_id}` 
+        'Authorization': `apikey=${this.props.api_key}` 
       }
     });
 
     // Post new question to API
-    comms.post('/question', {
-        content: this.state.value
-      })
+    let payload = {
+      content: this.state.value
+    };
+    comms.post('/question', payload)
       .then((res) => {
-        console.log(res);
+        this.setState({ created_id: res.data.id });
       })
       .catch((err) => {
-        console.log("Error fetching data.");
+        console.log("Error posting data:");
+        console.error(err);
       });
   }
 
@@ -60,7 +63,7 @@ class QuestionCreator extends Component {
               onChange={this.handleChange.bind(this)}
             />
             <FormControl.Feedback />
-            <HelpBlock>An ID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
+            <HelpBlock>AnID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
             <Button 
               onClick={this.createQuestion.bind(this)}
             >
@@ -68,6 +71,13 @@ class QuestionCreator extends Component {
             </Button>
           </FormGroup>
         </form>
+
+        { this.state.created_id > 0 ? 
+          <Alert bsStyle="info">
+            Question created with id: <strong>{this.state.created_id}</strong>
+          </Alert>
+          : null
+        }
       </div>
     );
   }

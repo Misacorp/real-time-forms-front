@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuestionViewer from '../Components/QuestionViewer';
 import QuestionCreator from '../Components/QuestionCreator';
+import Keygen from '../Utils/Keygen'
 
 class Questions extends Component {
   login() {
@@ -17,6 +18,7 @@ class Questions extends Component {
     const { isAuthenticated } = this.props.auth;
     
     let user_id = '';
+    let api_key = '';
 
     if(isAuthenticated()) {
       // Get profile from local storage
@@ -24,6 +26,7 @@ class Questions extends Component {
       if(typeof profile !== undefined && !!profile) {
         // Get user id
         user_id = this.getProperty(profile, 'user_id') || 'not set';
+        api_key = Keygen.encodeKey(user_id);
       }
       else {
         console.log("User profile has not been set.");
@@ -41,9 +44,9 @@ class Questions extends Component {
                 <h1>Manage Questions</h1>
                 <p>View your questions and create new ones.</p>
 
-                <QuestionCreator user={user_id} />
+                <QuestionCreator api_key={api_key} />
                 <hr/>
-                <QuestionViewer user={user_id} />
+                <QuestionViewer api_key={api_key} />
               </div>
             )
         }

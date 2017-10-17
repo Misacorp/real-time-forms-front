@@ -12,14 +12,12 @@ class QuestionViewer extends Component {
   }
 
   getQuestions() {
-    const user_id = this.props.user;
-
     // Initialize Axios for API requests
     const comms = axios.create({
       baseURL: 'http://realtimeforms.local:1337/api',
       timeout: '15000',
       headers: {
-        'Authorization': `apikey=${user_id}` 
+        'Authorization': `apikey=${this.props.api_key}` 
       }
     })
 
