@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Welcome from '../Components/Welcome';
+import QuestionViewer from '../Components/QuestionViewer';
+import QuestionCreator from '../Components/QuestionCreator';
 
-class Home extends Component {
+class Questions extends Component {
   login() {
     this.props.auth.login();
   }
@@ -14,15 +15,15 @@ class Home extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-
-    let username = 'there';
+    
+    let user_id = '';
 
     if(isAuthenticated()) {
       // Get profile from local storage
       let profile = JSON.parse(localStorage.getItem('user_profile'));
       if(typeof profile !== undefined && !!profile) {
-        // Get user's given name
-        username = this.getProperty(profile, 'given_name') || username;
+        // Get user id
+        user_id = this.getProperty(profile, 'user_id') || 'not set';
       }
       else {
         console.log("User profile has not been set.");
@@ -37,9 +38,12 @@ class Home extends Component {
         {
           isAuthenticated() && (
               <div>
-                <Welcome name={username}/>
-                <h1>Real Time Forms</h1>
-                <p>This is your control panel. Go ahead and click 'Questions' in the above menu.</p>
+                <h1>Manage Questions</h1>
+                <p>View your questions and create new ones.</p>
+
+                <QuestionCreator user={user_id} />
+                <hr/>
+                <QuestionViewer user={user_id} />
               </div>
             )
         }
@@ -62,4 +66,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Questions;

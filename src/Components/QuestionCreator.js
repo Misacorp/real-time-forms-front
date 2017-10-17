@@ -45,27 +45,30 @@ class QuestionCreator extends Component {
 
   render() {
     return (
-      <form>
-        <FormGroup
-          controlId="formBasicText"
-          validationState={this.getValidationState()}
-        >
-          <ControlLabel>Create a new question</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.value}
-            placeholder="What would you like to know?"
-            onChange={this.handleChange.bind(this)}
-          />
-          <FormControl.Feedback />
-          <HelpBlock>An ID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
-          <Button 
-            onClick={this.createQuestion.bind(this)}
+      <div>
+        <h2>Create Question</h2>
+        <form>
+          <FormGroup
+            controlId="formBasicText"
+            validationState={this.getValidationState()}
           >
-            Submit
-          </Button>
-        </FormGroup>
-      </form>
+            <ControlLabel>Create a new question</ControlLabel>
+            <FormControl
+              type="text"
+              value={this.state.value}
+              placeholder="What would you like to know?"
+              onChange={this.handleChange.bind(this)}
+            />
+            <FormControl.Feedback />
+            <HelpBlock>An ID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
+            <Button 
+              onClick={this.createQuestion.bind(this)}
+            >
+              Submit
+            </Button>
+          </FormGroup>
+        </form>
+      </div>
     );
   }
 }

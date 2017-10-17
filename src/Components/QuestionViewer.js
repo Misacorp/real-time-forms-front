@@ -39,6 +39,7 @@ class QuestionViewer extends Component {
   render() {
     return (
       <div>
+        <h2>View Questions</h2>
         <Button
           bsStyle="primary"
           className="btn-margin"
