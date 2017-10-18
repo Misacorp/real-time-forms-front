@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Welcome from '../Components/Welcome';
+import KeyDisplay from '../Components/KeyDisplay';
+import Keygen from '../Utils/Keygen'
 
 class Home extends Component {
   login() {
@@ -16,6 +18,8 @@ class Home extends Component {
     const { isAuthenticated } = this.props.auth;
 
     let username = 'there';
+    let user_id = '';
+    let api_key = '';
 
     if(isAuthenticated()) {
       // Get profile from local storage
@@ -23,6 +27,9 @@ class Home extends Component {
       if(typeof profile !== undefined && !!profile) {
         // Get user's given name
         username = this.getProperty(profile, 'given_name') || username;
+        // Get user id
+        user_id = this.getProperty(profile, 'user_id') || 'not set';
+        api_key = Keygen.encodeKey(user_id);
       }
       else {
         console.log("User profile has not been set.");
@@ -40,6 +47,8 @@ class Home extends Component {
                 <Welcome name={username}/>
                 <h1>Real Time Forms</h1>
                 <p>This is your control panel. Go ahead and click 'Questions' in the above menu.</p>
+                <KeyDisplay api_key={api_key} />
+                <p>When performing requests to the Real Time Forms API, always include your API key in the <strong>Authorization</strong> header.</p>
               </div>
             )
         }
