@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "dev": "REACT_APP_API_ENDPOINT='http://realtimeforms.local:1337/api' react-scripts start",
+    "dev": "REACT_APP_API_ENDPOINT='http://realtimeforms.local:1337/api' REACT_APP_AUTH0_REDIRECT_URI='http://realtimeforms.local:3000' react-scripts start",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

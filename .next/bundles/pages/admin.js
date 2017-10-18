@@ -13007,7 +13007,7 @@ var Auth = function () {
     this.auth0 = new _auth0Js2.default.WebAuth({
       domain: 'misacorp.eu.auth0.com',
       clientID: 'jIvvB1A3jsQgHcazVwINXgpS7Q9Wc3sq',
-      redirectUri: 'http://realtimeforms.local:3000',
+      redirectUri: process.env.REACT_APP_AUTH0_REDIRECT_URI,
       audience: 'https://misacorp.eu.auth0.com/userinfo',
       responseType: 'token id_token',
       scope: 'openid'
