@@ -14,7 +14,7 @@ class QuestionCreator extends Component {
   createQuestion() {
     // Initialize Axios for API requests
     const comms = axios.create({
-      baseURL: 'http://realtimeforms.local:1337/api',
+      baseURL: process.env.REACT_APP_API_ENDPOINT,
       timeout: '15000',
       headers: {
         'Authorization': this.props.api_key
@@ -63,7 +63,7 @@ class QuestionCreator extends Component {
               onChange={this.handleChange.bind(this)}
             />
             <FormControl.Feedback />
-            <HelpBlock>AnID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
+            <HelpBlock>An ID will be returned when a question has been created successfully. Use this ID for sending and retrieving responses.</HelpBlock>
             <Button 
               onClick={this.createQuestion.bind(this)}
             >

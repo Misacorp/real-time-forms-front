@@ -14,12 +14,12 @@ class QuestionViewer extends Component {
   getQuestions() {
     // Initialize Axios for API requests
     const comms = axios.create({
-      baseURL: 'http://realtimeforms.local:1337/api',
+      baseURL: process.env.REACT_APP_API_ENDPOINT,
       timeout: '15000',
       headers: {
         'Authorization': this.props.api_key
       }
-    })
+    });
 
     // Get questions from API
     comms.get('/question')
